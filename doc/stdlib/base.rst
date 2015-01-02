@@ -4195,15 +4195,12 @@ As ``BigInt`` represents unbounded integers, the interval must be specified (e.g
 
    * a type: the set of values to pick from is then equivalent to ``typemin(S):typemax(S)`` for integers (this is not applicable to ``BigInt``), and to [0,1) for floating point numbers;
 
-   ``S`` defaults to ``Float64``.
+   ``S`` defaults to ``Float64``. Passing the special type ``Bit`` together with dimension specifications produces a ``BitArray``
+   filled with random values.
 
 .. function:: rand!([rng], A ,[coll])
 
    Populate the array A with random values. If the indexable collection ``coll`` is specified, the values are picked randomly from ``coll``. This is equivalent to ``copy!(A, rand(rng, coll, size(A)))`` or ``copy!(A, rand(rng, eltype(A), size(A)))`` but without allocating a new array.
-
-.. function:: randbool([rng], [dims...])
-
-   Generate a random boolean value. Optionally, generate a ``BitArray`` of random boolean values.
 
 .. function:: randn([rng], [dims...])
 
@@ -4323,7 +4320,8 @@ Constructors
    Construct an uninitialized cell array (heterogeneous array). ``dims`` can be either a tuple or a series of integer arguments.
 .. function:: zeros(type, dims)
 
-   Create an array of all zeros of specified type. The type defaults to Float64 if not specified.
+   Create an array of all zeros of specified type. The type defaults to Float64 if not specified. If the special type ``Bit`` is passed,
+   create a ``BitArray`` filled with ``false`` values.
 
 .. function:: zeros(A)
 
@@ -4331,19 +4329,12 @@ Constructors
 
 .. function:: ones(type, dims)
 
-   Create an array of all ones of specified type. The type defaults to Float64 if not specified.
+   Create an array of all ones of specified type. The type defaults to Float64 if not specified. If the special type ``Bit`` is passed,
+   create a ``BitArray`` filled with ``true`` values.
 
 .. function:: ones(A)
 
    Create an array of all ones with the same element type and shape as A.
-
-.. function:: trues(dims)
-
-   Create a ``BitArray`` with all values set to true
-
-.. function:: falses(dims)
-
-   Create a ``BitArray`` with all values set to false
 
 .. function:: fill(x, dims)
 
